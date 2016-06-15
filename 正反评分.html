@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>评分</title>
+    <style>
+        div {
+            overflow: hidden;
+            margin: 50px auto;;
+            width: 500px;
+        }
+        span {
+            float: left;
+            width: 50px;
+            height: 50px;
+            font: 30px / 50px Arial,"simsun";
+            color: #fff;
+            text-shadow: 0 0 10px #000;
+            cursor: pointer;
+        }
+        .good {
+            color: #9C0;
+            text-shadow: 0 0 10px red;
+        }
+        .bad {
+            color: #3c3c3c;
+            text-shadow: 0 0 10px blue;
+        }
+    </style>
+    <script>
+        window.onload = function (){
+            var top = document.getElementById('top');
+            var spans = top.getElementsByTagName('span');
+            var middle = Math.floor(spans.length/2);
+            var nub = -1;
+            for(var i = 0; i < spans.length; i++){
+                spans[i].index = i;
+                spans[i].onmouseover = function (){
+                    for(var i = 0; i < spans.length;i++){
+                        spans[i].className = '';
+                    }
+                    if(this.index < middle){
+                        for(var j = this.index; j <= middle; j++){
+                            spans[j].className = 'bad';
+                        }
+                    }
+                    if(this.index >= middle){
+                        for(var b = middle; b <= this.index; b++){
+                            spans[b].className = 'good';
+                        }
+                    }
+                };
+                spans[i].onmouseout = function (){
+                    for(var i = 0; i < spans.length; i++){
+                        spans[i].className = '';
+                    }
+                    console.log(nub);
+                    if (nub < 0){
+                        return;
+                    }
+                    if(nub < middle){
+                        for(var j = nub; j <= middle; j++){
+                            spans[j].className = 'bad';
+                        }
+                    }
+                    if(nub >= middle){
+                        for(var b = middle; b <= nub; b++){
+                            spans[b].className = 'good';
+                        }
+                    }
+                };
+                spans[i].onclick = function(){
+                    nub = this.index;
+                };
+            }
+        };
+    </script>
+</head>
+<body>
+<div id="top">
+    <span>※</span>
+    <span>※</span>
+    <span>※</span>
+    <span>※</span>
+    <span>○</span>
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+</div>
+</body>
+</html>
